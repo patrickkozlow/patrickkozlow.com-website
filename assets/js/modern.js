@@ -1,5 +1,84 @@
 document.addEventListener('DOMContentLoaded', function() {
     
+    // Typing animation for hero section (only on initial load)
+    const heroGreeting = document.getElementById('hero-greeting');
+    const heroName = document.getElementById('hero-name');
+    const heroTagline = document.getElementById('hero-tagline');
+    const heroDescription = document.getElementById('hero-description');
+    const heroCta = document.getElementById('hero-cta');
+    
+    // Check if this is the initial load
+    const hasSeenAnimation = sessionStorage.getItem('heroAnimationShown');
+    
+    if (!hasSeenAnimation) {
+        // Hide content initially
+        heroName.style.opacity = '0';
+        heroTagline.style.opacity = '0';
+        heroDescription.style.opacity = '0';
+        heroCta.style.opacity = '0';
+        
+        // Add typing cursor class
+        heroGreeting.classList.add('typing');
+        
+        // Typing animation function
+        function typeText(element, text, speed = 50) {
+            return new Promise((resolve) => {
+                let i = 0;
+                const timer = setInterval(() => {
+                    if (i < text.length) {
+                        element.textContent += text.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(timer);
+                        resolve();
+                    }
+                }, speed);
+            });
+        }
+        
+        // Animate typing sequence
+        async function animateHero() {
+            // Type "Hi,"
+            await typeText(heroGreeting, 'Hi,', 80);
+            
+            // Pause (human-like break)
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            // Type " my name is"
+            await typeText(heroGreeting, ' my name is', 60);
+            
+            // Brief pause before revealing content
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            // Remove cursor and reveal rest of content
+            heroGreeting.classList.remove('typing');
+            
+            // Fade in the rest of the hero content
+            heroName.style.transition = 'opacity 0.8s ease-in';
+            heroTagline.style.transition = 'opacity 0.8s ease-in 0.2s';
+            heroDescription.style.transition = 'opacity 0.8s ease-in 0.4s';
+            heroCta.style.transition = 'opacity 0.8s ease-in 0.6s';
+            
+            heroName.style.opacity = '1';
+            setTimeout(() => heroTagline.style.opacity = '1', 200);
+            setTimeout(() => heroDescription.style.opacity = '1', 400);
+            setTimeout(() => heroCta.style.opacity = '1', 600);
+            
+            // Mark animation as shown
+            sessionStorage.setItem('heroAnimationShown', 'true');
+        }
+        
+        // Start animation after a brief delay
+        setTimeout(animateHero, 300);
+    } else {
+        // Not initial load - show everything immediately
+        heroGreeting.textContent = 'Hi, my name is';
+        heroName.style.opacity = '1';
+        heroTagline.style.opacity = '1';
+        heroDescription.style.opacity = '1';
+        heroCta.style.opacity = '1';
+    }
+    
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section[id]');
     const tabButtons = document.querySelectorAll('.tab-button');

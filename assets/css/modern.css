@@ -220,6 +220,23 @@ main {
     font-size: clamp(var(--fz-sm), 5vw, var(--fz-md));
     font-weight: 400;
     margin: 0 0 30px 4px;
+    position: relative;
+}
+
+.hero-greeting.typing::after {
+    content: '|';
+    color: var(--green);
+    animation: blink 1s infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
 }
 
 .hero-name {
