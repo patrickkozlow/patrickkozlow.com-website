@@ -21,6 +21,9 @@ npm-debug.log*
 # AWS CLI cache
 .aws-sam/
 
+# GitHub authentication file (contains sensitive token)
+.github-auth.md
+
 # Node modules (if using npm for build tools)
 node_modules/
 
