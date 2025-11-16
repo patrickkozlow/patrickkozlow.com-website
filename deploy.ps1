@@ -7,7 +7,7 @@ $REGION = "us-west-2"
 Write-Host "Deploying website to S3 bucket: $BUCKET_NAME" -ForegroundColor Green
 
 # Sync files to S3
-aws s3 sync . s3://$BUCKET_NAME --region $REGION --delete --exclude ".git/*" --exclude ".gitignore" --exclude "README.md" --exclude "deploy.ps1" --exclude "deploy.sh"
+aws s3 sync . s3://$BUCKET_NAME --region $REGION --delete --exclude ".git/*" --exclude ".github/*" --exclude ".gitignore" --exclude "*.md" --exclude "deploy.ps1" --exclude "deploy.sh" --exclude "git-push.ps1" --exclude "html5up-miniport/*"
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "Deployment successful!" -ForegroundColor Green

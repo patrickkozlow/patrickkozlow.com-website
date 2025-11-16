@@ -1,0 +1,47 @@
+name: Deploy to AWS S3
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment on push to main branch
+  workflow_dispatch:  # Allow manual trigger from GitHub Actions tab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+      
+      - name: Sync files to S3
+        run: |
+          aws s3 sync . s3://patrickkozlow.com --region us-west-2 --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude ".gitignore" \
+            --exclude "*.md" \
+            --exclude "deploy.ps1" \
+            --exclude "deploy.sh" \
+            --exclude "git-push.ps1" \
+            --exclude "html5up-miniport/*"
+      
+      - name: Invalidate CloudFront cache (if applicable)
+        run: |
+          # Uncomment below if you add CloudFront in the future
+          # aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
+          echo "Deployment completed successfully!"
+      
+      - name: Deployment summary
+        run: |
+          echo "✅ Website deployed to S3 bucket: patrickkozlow.com"
+          echo "🌐 Live at: https://patrickkozlow.com"
+          echo "📅 Deployed at: $(date)"
+

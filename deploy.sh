@@ -10,10 +10,13 @@ echo "Deploying website to S3 bucket: $BUCKET_NAME"
 # Sync files to S3
 aws s3 sync . s3://$BUCKET_NAME --region $REGION --delete \
     --exclude ".git/*" \
+    --exclude ".github/*" \
     --exclude ".gitignore" \
-    --exclude "README.md" \
+    --exclude "*.md" \
     --exclude "deploy.ps1" \
-    --exclude "deploy.sh"
+    --exclude "deploy.sh" \
+    --exclude "git-push.ps1" \
+    --exclude "html5up-miniport/*"
 
 if [ $? -eq 0 ]; then
     echo "Deployment successful!"

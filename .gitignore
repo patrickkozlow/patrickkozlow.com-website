@@ -18,12 +18,22 @@ npm-debug.log*
 *.tmp
 *.temp
 
-# AWS CLI cache
+# AWS credentials and CLI cache
 .aws-sam/
+.aws/
+*.pem
+*.key
+credentials
+config
 
 # GitHub authentication file (contains sensitive token)
 .github-auth.md
 git-push.ps1
+add-github-secrets.ps1
+
+# Environment variables (if used for local testing)
+.env
+.env.local
 
 # Node modules (if using npm for build tools)
 node_modules/

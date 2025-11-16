@@ -26,20 +26,33 @@ git push -u origin main
 
 You'll be prompted to sign in to GitHub - follow the authentication flow.
 
-### 3. Make Changes (Daily workflow)
+### 3. Set Up Automated Deployment (One-time)
+
+**GitHub Actions** will automatically deploy your website when you push!
+
+**Follow the setup guide**: [DEPLOYMENT_SETUP.md](DEPLOYMENT_SETUP.md)
+
+Quick steps:
+1. Create AWS IAM user for GitHub Actions
+2. Add AWS credentials to GitHub Secrets
+3. Push to GitHub - automatic deployment! ✨
+
+### 4. Make Changes (Daily workflow)
 
 ```powershell
 # Edit your files (HTML, CSS, images, etc.)
 
-# Option A: Quick commit and push (recommended)
-.\git-push.ps1 "Updated about section"
-
-# Option B: Manual steps
+# Commit and push - deployment is automatic!
 git add .
 git commit -m "Updated about section"
-.\git-push.ps1
+git push
 
-# Deploy to S3 to make it live
+# That's it! GitHub Actions deploys to S3 automatically 🎉
+# Watch progress at: github.com/patrickkozlow/patrickkozlow.com-website/actions
+```
+
+**Manual deployment fallback** (if needed):
+```powershell
 .\deploy.ps1
 ```
 
@@ -68,9 +81,9 @@ git commit -m "Updated about section"
 | `git status` | See what files changed |
 | `git add .` | Stage all changes |
 | `git commit -m "message"` | Save changes |
-| `git push` | Upload to GitHub |
-| `.\deploy.ps1` | Deploy to S3 |
+| `git push` | Upload to GitHub + Auto-deploy to S3 ✨ |
 | `git log` | See commit history |
+| `.\deploy.ps1` | Manual deploy (fallback only) |
 
 ## 🆘 Need Help?
 

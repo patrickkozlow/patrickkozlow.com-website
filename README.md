@@ -21,59 +21,70 @@ This is a static website built with HTML, CSS, and JavaScript, showcasing:
 - **DNS**: AWS Route53
 - **Region**: us-west-2 (Oregon)
 - **Version Control**: Git + GitHub
-- **Deployment**: AWS CLI sync
+- **CI/CD**: GitHub Actions (Automated Deployment)
+- **Deployment**: AWS CLI sync via GitHub Actions
 
-## 🚀 Deployment Workflow
+## 🚀 Automated Deployment Workflow
 
-### Prerequisites
+### ✨ Automatic Deployment with GitHub Actions
 
-1. **AWS CLI** installed and configured
-   - Download from: https://aws.amazon.com/cli/
-   - Configure with: `aws configure`
-   - Ensure you have credentials with S3 write permissions
+This repository uses **GitHub Actions** for automatic deployment to AWS S3!
 
-2. **Git** installed
-   - Download from: https://git-scm.com/
+**Simple Workflow:**
+1. Make changes to your website
+2. Commit and push to GitHub
+3. GitHub Actions automatically deploys to S3
+4. Your website is live!
 
-### Making Changes
+```powershell
+# Make your changes
+git add .
+git commit -m "Updated portfolio"
+git push
+# That's it! Deployment happens automatically 🎉
+```
 
-1. **Edit files locally**
-   ```bash
-   # Make your changes to HTML, CSS, JavaScript, or images
-   # Test locally by opening index.html in a browser
-   ```
+### 📋 Initial Setup Required (One-Time)
 
-2. **Commit changes to Git**
-   ```bash
-   git add .
-   git commit -m "Description of your changes"
-   ```
+To enable automated deployment, you need to configure AWS credentials in GitHub Secrets.
 
-3. **Push to GitHub** (optional but recommended)
-   ```bash
-   git push origin main
-   ```
+**See the detailed setup guide**: [DEPLOYMENT_SETUP.md](DEPLOYMENT_SETUP.md)
 
-4. **Deploy to S3**
-   
-   **On Windows (PowerShell):**
-   ```powershell
-   .\deploy.ps1
-   ```
-   
-   **On Mac/Linux:**
-   ```bash
-   chmod +x deploy.sh
-   ./deploy.sh
-   ```
+**Quick steps:**
+1. Create AWS IAM user for GitHub Actions
+2. Generate access keys
+3. Add keys to GitHub Secrets (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`)
+4. Push to main branch - deployment happens automatically!
 
-### What the Deployment Script Does
+### 📊 Monitor Deployments
 
-The deployment script:
-- Syncs all local files to the S3 bucket `patrickkozlow.com`
-- Deletes files from S3 that no longer exist locally (keeps S3 clean)
-- Excludes Git and development files (.git, .gitignore, README.md, deploy scripts)
-- Uses the `us-west-2` region
+View deployment status and history:
+- **GitHub Actions**: https://github.com/patrickkozlow/patrickkozlow.com-website/actions
+
+### 🔧 Manual Deployment (Fallback)
+
+If needed, you can still deploy manually using the deployment scripts:
+
+**On Windows (PowerShell):**
+```powershell
+.\deploy.ps1
+```
+
+**On Mac/Linux:**
+```bash
+chmod +x deploy.sh
+./deploy.sh
+```
+
+### What Automated Deployment Does
+
+The GitHub Actions workflow:
+- Triggers automatically on push to `main` branch
+- Syncs all website files to the S3 bucket `patrickkozlow.com`
+- Deletes obsolete files from S3 (keeps bucket clean)
+- Excludes Git and development files
+- Provides deployment logs and notifications
+- Can be manually triggered from GitHub Actions tab
 
 ## 📁 Project Structure
 
