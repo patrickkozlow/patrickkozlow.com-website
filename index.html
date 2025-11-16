@@ -11,13 +11,30 @@
 <body>
     <div class="nav-wrapper">
         <nav id="navbar">
-            <ul>
-                <li><a href="#hero" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link"><span class="nav-number">01.</span> About</a></li>
-                <li><a href="#resume" class="nav-link"><span class="nav-number">02.</span> Resume</a></li>
-                <li><a href="#experience" class="nav-link"><span class="nav-number">03.</span> Experience</a></li>
-                <li><a href="#projects" class="nav-link"><span class="nav-number">04.</span> Projects</a></li>
-                <li><a href="#contact" class="nav-link"><span class="nav-number">05.</span> Contact</a></li>
+            <ul class="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#resume" class="nav-link">Resume</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+            <ul class="nav-social">
+                <li>
+                    <a href="https://github.com/patrickkozlow" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/patrick-kozlow-m-sc-p-eng-927bb882/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#contact" class="social-link" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
@@ -82,9 +99,53 @@
             </div>
             
             <div class="certifications">
-                <h3>Certifications</h3>
-                <div class="cert-image">
-                    <img src="images/credentials_2024.png" alt="Microsoft Azure Certifications" />
+                <h3 class="certifications-heading">Certifications</h3>
+                <div class="cert-carousel-wrapper">
+                    <div class="cert-carousel">
+                        <div class="cert-item">
+                            <img src="images/azure-fundamentals.png" alt="Azure Fundamentals" />
+                        </div>
+                        <div class="cert-item">
+                            <img src="images/azure-data-engineer.png" alt="Azure Data Engineer Associate" />
+                        </div>
+                        <div class="cert-item">
+                            <img src="images/azure-solutions-architect.png" alt="Azure Solutions Architect Expert" />
+                        </div>
+                        <div class="cert-item">
+                            <img src="images/databricks-professional-data-engineer.png" alt="Databricks Professional Data Engineer" />
+                        </div>
+                        <div class="cert-item">
+                            <img src="images/databricks-associate-ml-engineer.png" alt="Databricks Associate ML Engineer" />
+                        </div>
+                        <div class="cert-item">
+                            <img src="images/aws-cloud-practitioner.png" alt="AWS Cloud Practitioner" />
+                        </div>
+                        <div class="cert-item">
+                            <img src="images/gcp-cloud-engineer.png" alt="GCP Cloud Engineer" />
+                        </div>
+                        <!-- Duplicate items for seamless loop -->
+                        <div class="cert-item">
+                            <img src="images/azure-fundamentals.png" alt="Azure Fundamentals" />
+                        </div>
+                        <div class="cert-item">
+                            <img src="images/azure-data-engineer.png" alt="Azure Data Engineer Associate" />
+                        </div>
+                        <div class="cert-item">
+                            <img src="images/azure-solutions-architect.png" alt="Azure Solutions Architect Expert" />
+                        </div>
+                        <div class="cert-item">
+                            <img src="images/databricks-professional-data-engineer.png" alt="Databricks Professional Data Engineer" />
+                        </div>
+                        <div class="cert-item">
+                            <img src="images/databricks-associate-ml-engineer.png" alt="Databricks Associate ML Engineer" />
+                        </div>
+                        <div class="cert-item">
+                            <img src="images/aws-cloud-practitioner.png" alt="AWS Cloud Practitioner" />
+                        </div>
+                        <div class="cert-item">
+                            <img src="images/gcp-cloud-engineer.png" alt="GCP Cloud Engineer" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -138,8 +199,7 @@
             <h2 class="section-heading">Where I've Worked</h2>
             <div class="experience-container">
                 <div class="company-tabs">
-                    <button class="tab-button active" data-company="air-canada-lead">Air Canada</button>
-                    <button class="tab-button" data-company="air-canada-senior">Air Canada</button>
+                    <button class="tab-button active" data-company="air-canada">Air Canada</button>
                     <button class="tab-button" data-company="nureva">Nureva Inc.</button>
                     <button class="tab-button" data-company="orbsurgical">OrbSurgical Ltd.</button>
                     <button class="tab-button" data-company="ucalgary">University of Calgary</button>
@@ -147,31 +207,20 @@
                 </div>
                 
                 <div class="company-content">
-                    <div class="job-panel active" data-company="air-canada-lead">
-                        <h3>Lead Data Engineer <span class="company-link">@ <a href="https://www.aircanada.com" target="_blank">Air Canada</a></span></h3>
-                        <p class="job-date">Aug 2023 – Present</p>
-                        <ul class="job-duties">
-                            <li>Led cross-functional teams in the delivery of Proof of Concepts (POCs) and the scaling of productionized data architecture solutions, achieving a 20% reduction in initial costs while meeting timelines and balancing feature requests.</li>
-                            <li>Designed and implemented modernized enterprise data architecture solutions within Microsoft Azure, leveraging serverless technologies to scale data processing capabilities and significantly reduce storage overheads by over 100GB.</li>
-                            <li>Specialized in Microsoft Azure, including Azure Data Factory, Azure Data Lake, Databricks, Azure Synapse Analytics, and Azure Machine Learning Service, ensuring seamless integration with industry-leading tools.</li>
-                            <li>Developed and presented mission-critical data architecture blueprints for pivotal business applications, ensuring alignment with overarching business objectives.</li>
-                            <li>Acted as a subject matter expert, providing technical guidance and support for data-related initiatives within the Microsoft ecosystem, showcasing expertise in Cloud Solution Architecture, Data & AI, and Big Data.</li>
-                        </ul>
-                    </div>
-
-                    <div class="job-panel" data-company="air-canada-senior">
+                    <div class="job-panel active" data-company="air-canada">
                         <h3>Senior Data Engineer <span class="company-link">@ <a href="https://www.aircanada.com" target="_blank">Air Canada</a></span></h3>
-                        <p class="job-date">Aug 2022 – Aug 2023</p>
+                        <p class="job-date">Aug 2022 – Aug 2024</p>
                         <ul class="job-duties">
-                            <li>Engineered ingestion and data transformation workflows for airline data, leveraging Big Data technologies and Microsoft Azure to develop predictive simulation models. This initiative resulted in optimizing multiple KPIs, achieving a 10% increase in on-time performance for passenger flights.</li>
-                            <li>Led the orchestration of automated ETL pipelines within integrated environments like Databricks and Microsoft Azure, showcasing innovation in data processing. Reduced processing time from hours to minutes by utilizing caching and optimizing computational resources.</li>
-                            <li>Implemented robust data quality monitoring procedures, demonstrating a commitment to integrity and accountability. Enhanced data accuracy by 20%, ensuring the integrity of critical data modeling systems.</li>
-                            <li>Integrated various APIs into ongoing data strategies, fostering collaboration across diverse business units and enhancing the robustness of the solutions.</li>
+                            <li>Led cross-functional teams in delivering Proof of Concepts (POCs) and scaling productionized data architecture solutions, achieving a 20% reduction in initial costs while meeting timelines and balancing feature requests.</li>
+                            <li>Engineered ingestion and data transformation workflows leveraging Azure and Big Data technologies, developing predictive simulation models that resulted in optimizing multiple KPIs and achieving a 10% increase in on-time performance for passenger flights.</li>
+                            <li>Designed and implemented modernized enterprise data architecture solutions within Microsoft Azure, leveraging serverless technologies to scale data processing capabilities and significantly reduce storage overheads by over 100GB.</li>
+                            <li>Led orchestration of automated ETL pipelines within Databricks and Microsoft Azure, reducing processing time from hours to minutes through caching and computational resource optimization.</li>
+                            <li>Acted as subject matter expert providing technical guidance for data-related initiatives, developing mission-critical data architecture blueprints aligned with business objectives and implementing robust data quality monitoring procedures that enhanced data accuracy by 20%.</li>
                         </ul>
                     </div>
 
                     <div class="job-panel" data-company="nureva">
-                        <h3>Junior Data Engineer <span class="company-link">@ <a href="https://www.nureva.com" target="_blank">Nureva Inc.</a></span></h3>
+                        <h3>Data Engineer <span class="company-link">@ <a href="https://www.nureva.com" target="_blank">Nureva Inc.</a></span></h3>
                         <p class="job-date">Feb 2019 – Aug 2022</p>
                         <ul class="job-duties">
                             <li>Applied problem-solving & leadership skills to establish an alignment between stakeholder needs and engineering best practices, as well as successfully execute multiple cross-functional project plans.</li>
@@ -392,7 +441,7 @@
         </section>
 
         <footer>
-            <p>&copy; 2024 Patrick Kozlow. All rights reserved. | Template: CCA 3.0 License (HTML5 UP)</p>
+            <p>&copy; 2025 Patrick Kozlow. All rights reserved.</p>
         </footer>
     </main>
 
