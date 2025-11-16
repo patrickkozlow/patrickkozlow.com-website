@@ -31,10 +31,13 @@ You'll be prompted to sign in to GitHub - follow the authentication flow.
 ```powershell
 # Edit your files (HTML, CSS, images, etc.)
 
-# Commit changes
+# Option A: Quick commit and push (recommended)
+.\git-push.ps1 "Updated about section"
+
+# Option B: Manual steps
 git add .
 git commit -m "Updated about section"
-git push
+.\git-push.ps1
 
 # Deploy to S3 to make it live
 .\deploy.ps1

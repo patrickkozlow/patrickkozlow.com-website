@@ -23,6 +23,7 @@ npm-debug.log*
 
 # GitHub authentication file (contains sensitive token)
 .github-auth.md
+git-push.ps1
 
 # Node modules (if using npm for build tools)
 node_modules/
