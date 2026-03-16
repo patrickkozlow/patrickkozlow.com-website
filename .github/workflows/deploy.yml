@@ -33,11 +33,9 @@ jobs:
             --exclude "git-push.ps1" \
             --exclude "html5up-miniport/*"
       
-      - name: Invalidate CloudFront cache (if applicable)
+      - name: Invalidate CloudFront cache
         run: |
-          # Uncomment below if you add CloudFront in the future
-          # aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths "/*"
-          echo "Deployment completed successfully!"
+          aws cloudfront create-invalidation --distribution-id E3H2E0VUP60YUO --paths "/*"
       
       - name: Deployment summary
         run: |
