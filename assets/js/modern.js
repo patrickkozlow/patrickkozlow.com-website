@@ -55,8 +55,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    revealObserver.unobserve(entry.target);
+                    const el = entry.target;
+                    el.classList.add('is-visible');
+                    revealObserver.unobserve(el);
+                    // Drop the stagger once revealed so hover responses stay instant.
+                    setTimeout(() => { el.style.transitionDelay = ''; }, 1200);
                 }
             });
         }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
@@ -92,10 +95,32 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', updateActiveLink, { passive: true });
     updateActiveLink();
 
+    // Frosted bar gets its hairline only once content scrolls under it.
+    const navbar = document.querySelector('.nav-wrapper');
+    function updateNavEdge() {
+        navbar.classList.toggle('scrolled', window.scrollY > 8);
+    }
+    window.addEventListener('scroll', updateNavEdge, { passive: true });
+    updateNavEdge();
+
     // Experience tabs, with arrow key support.
     const tabs = Array.from(document.querySelectorAll('.tab-button'));
+    const tabList = document.querySelector('.company-tabs');
+    const indicator = document.querySelector('.tab-indicator');
+
+    // Slide the marker to the selected tab. Vertical list on wide screens,
+    // horizontal scroller on narrow ones; CSS reads whichever vars apply.
+    function moveIndicator(tab) {
+        if (!indicator || !tab) return;
+        tabList.style.setProperty('--tab-y', `${tab.offsetTop}px`);
+        tabList.style.setProperty('--tab-h', `${tab.offsetHeight}px`);
+        tabList.style.setProperty('--tab-x', `${tab.offsetLeft}px`);
+        tabList.style.setProperty('--tab-w', `${tab.offsetWidth}px`);
+    }
 
     function selectTab(tab) {
+        moveIndicator(tab);
+        tab.scrollIntoView({ block: 'nearest', inline: 'nearest' });
         tabs.forEach(t => {
             const selected = t === tab;
             t.classList.toggle('active', selected);
@@ -127,4 +152,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    const placeIndicator = () => moveIndicator(tabs.find(t => t.classList.contains('active')));
+    placeIndicator();
+    window.addEventListener('resize', placeIndicator);
+    if (document.fonts) document.fonts.ready.then(placeIndicator);
 });
