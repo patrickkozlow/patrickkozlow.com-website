@@ -53,3 +53,7 @@ venv/
 ENV/
 .venv
 
+
+# Local tooling
+.superpowers/
+.claude/
