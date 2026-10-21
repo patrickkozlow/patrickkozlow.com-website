@@ -1,0 +1,226 @@
+# Everything on patrickkozlow.com comes from this file.
+# Edit it, run `python build.py`, and preview dist/index.html.
+# Pushing to main rebuilds and deploys automatically.
+#
+# Text fields accept a little inline HTML (<strong>, <a>) where noted.
+
+[site]
+title = "Patrick Kozlow | Solutions Architect and Growth Engineer"
+description = "Patrick Kozlow is a solutions architect and growth engineer who designs and delivers data platforms, analytics and measurement systems for clients and executive teams."
+url = "https://patrickkozlow.com"
+photo = "images/TopPhoto_2024.jpg"
+github = "https://github.com/patrickkozlow"
+linkedin = "https://www.linkedin.com/in/patrick-kozlow/"
+formspree = "https://formspree.io/f/xayvaobd"
+
+[hero]
+name = "Patrick Kozlow."
+headline = "Solutions architect and growth engineer."
+# Inline HTML allowed.
+intro = """I work with clients and executives to figure out what they actually need, \
+design the system, build it, and stay until the results show up in the numbers. \
+My focus is <strong>data platforms, analytics and measurement</strong>. I'm currently a \
+<strong>Staff Growth Engineer at Headlight</strong>, after Instacart Ads and \
+Air Canada's Databricks platform."""
+
+[about]
+# One string per paragraph. Inline HTML allowed.
+paragraphs = [
+  """Hi, I'm Patrick. I sit between the business and the engineering team: I run \
+the discovery, design the architecture, build what's needed, and make sure people \
+actually use it.""",
+  """Over the last 8 years I've done that at Air Canada, where I led data engineering \
+for programs that saved $50M+ and returned $10M+ through Databricks; at Instacart, on \
+the Ads data platform behind reporting for enterprise advertisers; and now at Headlight, \
+where I run analytics and measurement for high growth consumer brands.""",
+  """I'm a Professional Engineer (P.Eng.) with APEGA and hold a Master of Science in \
+Electrical and Computer Engineering from the University of Calgary, where I researched \
+biometric machine learning and computer vision.""",
+]
+
+# Shown as a scrolling strip under About. Images live in images/.
+[[certifications]]
+name = "Azure Solutions Architect Expert"
+image = "images/azure-solutions-architect.png"
+
+[[certifications]]
+name = "Azure Data Engineer Associate"
+image = "images/azure-data-engineer.png"
+
+[[certifications]]
+name = "Databricks Certified Data Engineer Professional"
+image = "images/databricks-professional-data-engineer.png"
+
+[[certifications]]
+name = "Databricks Certified Machine Learning Associate"
+image = "images/databricks-associate-ml-engineer.png"
+
+[[certifications]]
+name = "Google Cloud Associate Cloud Engineer"
+image = "images/gcp-cloud-engineer.png"
+
+[[certifications]]
+name = "AWS Certified Cloud Practitioner"
+image = "images/aws-cloud-practitioner.png"
+
+[[certifications]]
+name = "Azure Fundamentals"
+image = "images/azure-fundamentals.png"
+
+# The "At a glance" section: headline results, then skills by group.
+[[glance.results]]
+value = "$50M+"
+label = "in operational savings from network wide risk forecasting"
+source = "Air Canada"
+
+[[glance.results]]
+value = "$10M+"
+label = "in realized ROI delivered through the Databricks platform"
+source = "Air Canada"
+
+[[glance.results]]
+value = "$5M"
+label = "under budget, delivered on time on the flagship Lakehouse program"
+source = "Air Canada"
+
+[[glance.results]]
+value = "$250K+/yr"
+label = "in infrastructure savings from the Apache Iceberg migration"
+source = "Instacart"
+
+[[glance.skills]]
+group = "Solutioning"
+items = ["Technical discovery", "Solution architecture", "Client advisory", "Roadmapping", "Vendor management"]
+
+[[glance.skills]]
+group = "Platforms"
+items = ["Databricks", "BigQuery", "Snowflake", "dbt", "Spark", "Airflow", "Kafka", "Terraform", "Azure", "AWS", "GCP"]
+
+[[glance.skills]]
+group = "Measurement"
+items = ["Looker", "Meta CAPI", "Google Enhanced Conversions", "GA4 / GTM", "Geo-lift", "MMM"]
+
+[[glance.skills]]
+group = "Languages"
+items = ["Python", "SQL", "Scala", "JavaScript"]
+
+# Experience, newest first. The first job opens by default.
+# "tab" is the short label in the company list.
+[[jobs]]
+tab = "Headlight"
+company = "Headlight"
+url = "https://headlight.co"
+title = "Staff Growth Engineer"
+dates = "Aug 2026 – Present"
+bullets = [
+  "Built Looker automations and client self service tooling, replacing manual weekly reporting with dashboards clients query on their own.",
+  "Own analytics and technical reporting for a portfolio of high growth consumer brands, acting as the technical lead on client calls from discovery through delivery.",
+  "Advise clients and media buyers on web and app conversion tracking, including Meta CAPI, Google Enhanced Conversions and mobile measurement partner setup.",
+  "Design and analyze geo-lift incrementality tests and support marketing mix modeling, turning results into budget recommendations clients act on.",
+  "Build Python ingest pipelines and API integrations on GCP, with dbt models in BigQuery feeding client dashboards, and set engineering standards for the growth team.",
+]
+
+[[jobs]]
+tab = "Instacart"
+company = "Instacart"
+url = "https://www.instacart.com"
+title = "Senior Software Engineer, Ads Data Platform"
+dates = "Sept 2024 – Jul 2026"
+bullets = [
+  "Partnered with executive sponsors in the advertising organization to design and build a data warehouse on terabyte scale streaming data, delivering real time ROAS, CPI and CTR reporting for 50+ enterprise clients.",
+  "Acted as the escalation point for the enterprise Ads platform, enforcing SLAs across 15+ downstream data products.",
+  "Led the migration of legacy ETL pipelines to Apache Iceberg on AWS, retiring outdated datamarts and saving $250K+ per year in infrastructure costs.",
+  "Built AI assistance tooling with Anthropic APIs and MCP integrations, cutting escalated tickets 40% across 10+ engineers through self service and faster onboarding.",
+  "Delivered a self service Terraform framework for data governance, letting engineers manage production database attributes through standardized CI/CD without platform team involvement.",
+]
+
+[[jobs]]
+tab = "Air Canada"
+company = "Air Canada"
+url = "https://www.aircanada.com"
+title = "Data Engineering Lead"
+dates = "Aug 2022 – Sept 2024"
+bullets = [
+  "Ran technical discovery workshops with operations leaders and executives, turning open requirements into architecture roadmaps that met data governance and compliance standards.",
+  "Led the data engineering workstream for network wide operational risk forecasting, identifying 100+ risks at 95% accuracy and generating $50M+ in savings by preventing last minute disruptions.",
+  "Delivered the flagship Databricks Lakehouse program on time and $5M under budget, coordinating multiple engineering teams and vendors, with $10M+ in realized ROI.",
+  "Worked with Databricks and Microsoft on platform cost and performance, cutting compute spend by 20% and deployment timelines by about 30% through CI/CD automation.",
+  "Designed Spark infrastructure processing 50TB of daily flight and passenger data, and moved deep learning risk models from proof of concept to production with MLflow.",
+]
+
+[[jobs]]
+tab = "Nureva"
+company = "Nureva Inc."
+url = "https://www.nureva.com"
+title = "Data Engineer"
+dates = "Feb 2019 – Aug 2022"
+bullets = [
+  "Developed ETL workflows with Spark and Airflow to migrate millions of records from an on premises deployment to a cloud architecture.",
+  "Designed a star schema data model for reporting and analysis on over $10M in annual marketing spend.",
+  "Owned on call for production pipelines, cutting mean time to resolution from four hours to under one through reliability improvements and automated alerting.",
+  "Built telemetry pipelines collecting continuous data from thousands of deployed devices, surfacing system failures before customers reported them.",
+]
+
+[[jobs]]
+tab = "OrbSurgical"
+company = "OrbSurgical Ltd."
+url = "https://orbsurgical.com"
+title = "Electronic Design Engineer"
+dates = "Oct 2018 – Feb 2019"
+bullets = [
+  "Led documentation and prototype development for projects valued over $5 million, aligning technical designs with end user requirements.",
+  "Ran system and component level testing, found the root causes of operational issues, and implemented fixes that improved reliability and performance.",
+]
+
+[[jobs]]
+tab = "U of Calgary"
+company = "University of Calgary"
+url = "https://www.ucalgary.ca"
+title = "Graduate Assistant, Research and Teaching"
+dates = "Aug 2016 – May 2018"
+bullets = [
+  "Designed and delivered technical material on Python, SQL, Scala and distributed systems, preparing students for production engineering work at scale.",
+  "Presented research and led technical discussions on biometric applications, data governance and security for academic panels.",
+]
+
+[[jobs]]
+tab = "Arc Reactions"
+company = "Arc Reactions Inc."
+url = "https://www.arcreactions.com/"
+title = "Engineering Technical Writer"
+dates = "2016 – 2017"
+bullets = [
+  "Researched and wrote articles on new engineering developments in the energy sector.",
+  "Peer reviewed colleagues' published material and gave feedback.",
+  "Organized interviews and meetings between key people from growing industries.",
+]
+
+[[projects]]
+title = "AWS IoT Streaming"
+url = "https://github.com/patrickkozlow/AWS_IoT_Proj"
+image = "images/AWSIoT.png"
+description = "An IoT streaming platform on AWS that collects, processes and visualizes real time sensor data, using IoT Core, Kinesis and Lambda for high throughput ingestion."
+tech = ["AWS IoT Core", "Kinesis", "Lambda", "Python", "DynamoDB"]
+
+[[projects]]
+title = "Gait Trait Analyzer"
+url = "https://github.com/patrickkozlow/BT_Labs_Gait_Experiment"
+image = "images/GaitTrait.PNG"
+description = "Contactless biometric gait analysis using computer vision and machine learning. A virtual 3D skeleton extracts gait traits and builds behavioral models in real time for identification."
+tech = ["Python", "OpenCV", "TensorFlow", "Scikit-learn", "Kinect SDK"]
+
+[[publications]]
+title = "Gait Type Analysis Using Dynamic Bayesian Networks"
+url = "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6210198"
+
+[[publications]]
+title = "Detection of Asymmetric Abnormalities in Gait using Depth Data and Dynamic Bayesian Networks"
+url = "https://ieeexplore.ieee.org/abstract/document/8652291"
+
+[[publications]]
+title = "Utilizing gait traits to improve e-border watchlist performance"
+url = "https://ieeexplore.ieee.org/abstract/document/8285250"
+
+[contact]
+heading = "Get in touch"
+text = "Have a data, analytics or measurement problem you'd like a second opinion on, or a role you think I'd be a fit for? Send me a note and I'll get back to you."

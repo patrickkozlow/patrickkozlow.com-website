@@ -9,37 +9,36 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build site
+        run: python build.py
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-2
-      
+
+      # dist/ holds only what the site needs, so no exclude list is required.
       - name: Sync files to S3
-        run: |
-          aws s3 sync . s3://patrickkozlow.com --region us-west-2 --delete \
-            --exclude ".git/*" \
-            --exclude ".github/*" \
-            --exclude ".gitignore" \
-            --exclude "*.md" \
-            --exclude "deploy.ps1" \
-            --exclude "deploy.sh" \
-            --exclude "git-push.ps1" \
-            --exclude "html5up-miniport/*"
-      
+        run: aws s3 sync dist s3://patrickkozlow.com --region us-west-2 --delete
+
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation --distribution-id E3H2E0VUP60YUO --paths "/*"
-      
+
       - name: Deployment summary
         run: |
           echo "✅ Website deployed to S3 bucket: patrickkozlow.com"
           echo "🌐 Live at: https://patrickkozlow.com"
           echo "📅 Deployed at: $(date)"
-

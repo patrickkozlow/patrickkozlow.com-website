@@ -1,27 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // Typing animation for hero section (only on initial load)
+
+    // Typing animation for the hero, once per session. The inline script in
+    // <head> adds .hero-intro only when it should play (and never with
+    // reduced motion), so the rest of the hero starts hidden without a flash.
+    const root = document.documentElement;
     const heroGreeting = document.getElementById('hero-greeting');
-    const heroName = document.getElementById('hero-name');
-    const heroTagline = document.getElementById('hero-tagline');
-    const heroDescription = document.getElementById('hero-description');
-    const heroCta = document.getElementById('hero-cta');
-    
-    // Check if this is the initial load
-    const hasSeenAnimation = sessionStorage.getItem('heroAnimationShown');
-    
-    if (!hasSeenAnimation) {
-        // Hide content initially
-        heroName.style.opacity = '0';
-        heroTagline.style.opacity = '0';
-        heroDescription.style.opacity = '0';
-        heroCta.style.opacity = '0';
-        
-        // Add typing cursor class
+
+    if (root.classList.contains('hero-intro')) {
+        const greeting = heroGreeting.textContent;
+        heroGreeting.textContent = '';
         heroGreeting.classList.add('typing');
-        
-        // Typing animation function
-        function typeText(element, text, speed = 50) {
+
+        function typeText(element, text, speed) {
             return new Promise((resolve) => {
                 let i = 0;
                 const timer = setInterval(() => {
@@ -35,157 +25,106 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, speed);
             });
         }
-        
-        // Animate typing sequence
+
+        const pause = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
         async function animateHero() {
-            // Type "Hi,"
-            await typeText(heroGreeting, 'Hi,', 80);
-            
-            // Pause (human-like break)
-            await new Promise(resolve => setTimeout(resolve, 500));
-            
-            // Type " my name is"
-            await typeText(heroGreeting, ' my name is', 60);
-            
-            // Brief pause before revealing content
-            await new Promise(resolve => setTimeout(resolve, 500));
-            
-            // Remove cursor and reveal rest of content
+            const comma = greeting.indexOf(',') + 1;
+            await typeText(heroGreeting, greeting.slice(0, comma), 80);
+            await pause(450);
+            await typeText(heroGreeting, greeting.slice(comma), 55);
+            await pause(350);
+
             heroGreeting.classList.remove('typing');
-            
-            // Fade in the rest of the hero content
-            heroName.style.transition = 'opacity 0.8s ease-in';
-            heroTagline.style.transition = 'opacity 0.8s ease-in 0.2s';
-            heroDescription.style.transition = 'opacity 0.8s ease-in 0.4s';
-            heroCta.style.transition = 'opacity 0.8s ease-in 0.6s';
-            
-            heroName.style.opacity = '1';
-            setTimeout(() => heroTagline.style.opacity = '1', 200);
-            setTimeout(() => heroDescription.style.opacity = '1', 400);
-            setTimeout(() => heroCta.style.opacity = '1', 600);
-            
-            // Mark animation as shown
-            sessionStorage.setItem('heroAnimationShown', 'true');
+            root.classList.add('hero-revealed');
+            try { sessionStorage.setItem('heroAnimationShown', 'true'); } catch (e) {}
         }
-        
-        // Start animation after a brief delay
+
         setTimeout(animateHero, 300);
-    } else {
-        // Not initial load - show everything immediately
-        heroGreeting.textContent = 'Hi, my name is';
-        heroName.style.opacity = '1';
-        heroTagline.style.opacity = '1';
-        heroDescription.style.opacity = '1';
-        heroCta.style.opacity = '1';
     }
-    
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('section[id]');
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const jobPanels = document.querySelectorAll('.job-panel');
-    
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (pageYOffset >= (sectionTop - 200)) {
-                current = section.getAttribute('id');
-            }
-        });
 
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
-        });
-    });
+    // Scroll reveal: each block fades up as it enters the viewport, once.
+    // Blocks rather than whole sections, so tall sections never sit blank.
+    if (root.classList.contains('motion') && 'IntersectionObserver' in window) {
+        const blocks = document.querySelectorAll(
+            '.content-section .section-heading, .about-text, .about-image, .certifications, ' +
+            '.glance-result, .glance-skill, .experience-container, .project-card, ' +
+            '.publications, .contact-content'
+        );
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 100;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const companyName = this.getAttribute('data-company');
-            
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            jobPanels.forEach(panel => {
-                panel.classList.remove('active');
-                if (panel.getAttribute('data-company') === companyName) {
-                    panel.classList.add('active');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
                 }
             });
-        });
-    });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+        blocks.forEach(block => {
+            block.classList.add('reveal');
+            // Stagger siblings in a row (the four results, the skill rows) slightly.
+            const siblings = Array.from(block.parentElement.children).filter(el => el.matches(block.tagName));
+            const index = siblings.indexOf(block);
+            if (siblings.length > 1 && index > 0) {
+                block.style.transitionDelay = `${Math.min(index, 4) * 70}ms`;
             }
-        });
-    }, observerOptions);
-
-    const animatedElements = document.querySelectorAll('.content-section, .project-card, .other-project-card');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-        observer.observe(el);
-    });
-
-    const ctaButton = document.querySelector('.cta-button');
-    if (ctaButton) {
-        ctaButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetSection = document.querySelector(this.getAttribute('href'));
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 100;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
+            revealObserver.observe(block);
         });
     }
 
-    window.addEventListener('load', function() {
-        document.body.style.opacity = '1';
+    // Highlight the nav link for the section in view.
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+
+    function updateActiveLink() {
+        let current = '';
+        sections.forEach(section => {
+            if (window.scrollY >= section.offsetTop - 200) {
+                current = section.id;
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveLink, { passive: true });
+    updateActiveLink();
+
+    // Experience tabs, with arrow key support.
+    const tabs = Array.from(document.querySelectorAll('.tab-button'));
+
+    function selectTab(tab) {
+        tabs.forEach(t => {
+            const selected = t === tab;
+            t.classList.toggle('active', selected);
+            t.setAttribute('aria-selected', selected);
+            t.tabIndex = selected ? 0 : -1;
+            const panel = document.getElementById(t.getAttribute('aria-controls'));
+            panel.hidden = !selected;
+            panel.classList.toggle('active', selected);
+        });
+    }
+
+    tabs.forEach((tab, i) => {
+        // Select on press, not release, so the panel responds immediately.
+        tab.addEventListener('pointerdown', () => selectTab(tab));
+        tab.addEventListener('click', () => selectTab(tab));
+        tab.addEventListener('keydown', (e) => {
+            const vertical = window.matchMedia('(min-width: 769px)').matches;
+            const next = vertical ? 'ArrowDown' : 'ArrowRight';
+            const prev = vertical ? 'ArrowUp' : 'ArrowLeft';
+            let target = null;
+            if (e.key === next) target = tabs[(i + 1) % tabs.length];
+            if (e.key === prev) target = tabs[(i - 1 + tabs.length) % tabs.length];
+            if (e.key === 'Home') target = tabs[0];
+            if (e.key === 'End') target = tabs[tabs.length - 1];
+            if (target) {
+                e.preventDefault();
+                selectTab(target);
+                target.focus();
+            }
+        });
     });
-
-    const navbar = document.querySelector('.nav-wrapper');
-    let lastScrollTop = 0;
-
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-            navbar.style.transform = 'translateY(-100%)';
-        } else {
-            navbar.style.transform = 'translateY(0)';
-        }
-        lastScrollTop = scrollTop;
-    }, false);
 });
