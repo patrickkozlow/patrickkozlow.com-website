@@ -57,3 +57,4 @@ ENV/
 # Local tooling
 .superpowers/
 .claude/
+.serena/

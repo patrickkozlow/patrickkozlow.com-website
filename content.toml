@@ -5,6 +5,11 @@
 # Text fields accept a little inline HTML (<strong>, <a>) where noted.
 
 [site]
+# "live" publishes the full site. "construction" publishes only the
+# under construction page (templates/construction.html), with everything
+# else left untouched here. Set it back to "live" and push to restore.
+mode = "construction"
+
 title = "Patrick Kozlow | Solutions Architect and Growth Engineer"
 description = "Patrick Kozlow is a solutions architect and growth engineer who designs and delivers data platforms, analytics and measurement systems for clients and executive teams."
 url = "https://patrickkozlow.com"

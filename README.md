@@ -13,6 +13,15 @@ python -m http.server 5000 --directory dist
 
 Open http://localhost:5000 to check it. `build.py` needs Python 3.11 or newer and has no dependencies.
 
+## Under construction mode
+
+`mode` at the top of `content.toml` controls what gets published:
+
+- `mode = "construction"` publishes only `templates/construction.html`, a single "under construction" page marked `noindex`.
+- `mode = "live"` publishes the full site.
+
+All the site's content and code stay in the repo either way. To restore the site, set `mode = "live"` and push to `main`. The last live version is also tagged `archive/site-2026-10`.
+
 ## How it fits together
 
 | Path | What it is |
