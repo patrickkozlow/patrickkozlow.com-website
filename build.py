@@ -18,6 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 DIST = ROOT / "dist"
 STATIC = ["assets", "images", "favicon.svg", "robots.txt"]
+CONSTRUCTION_STATIC = ["favicon.svg", "robots.txt"]
 
 
 def esc(text):
@@ -185,13 +186,30 @@ def render(content):
     return re.sub(r"\{\{(\w+)\}\}", fill, template)
 
 
+def render_construction(content):
+    template = (ROOT / "templates" / "construction.html").read_text(encoding="utf-8")
+    return template.replace("{{url}}", esc(content["site"]["url"]))
+
+
 def main():
     with open(ROOT / "content.toml", "rb") as f:
         content = tomllib.load(f)
 
+    mode = content["site"].get("mode", "live")
+    if mode not in ("live", "construction"):
+        raise ValueError(f'content.toml: site.mode must be "live" or "construction", not "{mode}"')
+
     if DIST.exists():
         shutil.rmtree(DIST)
     DIST.mkdir()
+
+    if mode == "construction":
+        # Publish only the placeholder. The full site stays in the repo, ready to restore.
+        for name in CONSTRUCTION_STATIC:
+            shutil.copy2(ROOT / name, DIST / name)
+        (DIST / "index.html").write_text(render_construction(content), encoding="utf-8")
+        print(f"Built {DIST / 'index.html'} (under construction)")
+        return
 
     for name in STATIC:
         src = ROOT / name

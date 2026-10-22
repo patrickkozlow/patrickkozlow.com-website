@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Under construction | Patrick Kozlow</title>
+    <!-- Temporary page: keep it out of search results so the real site's listing isn't replaced. -->
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="{{url}}/" />
+    <meta name="theme-color" content="#0a192f" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" />
+    <style>
+        :root {
+            --navy: #0a192f;
+            --lightest-slate: #ccd6f6;
+        }
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            padding: 0 clamp(24px, 9vw, 150px);
+            background:
+                radial-gradient(700px 460px at 50% 50%, rgba(100, 255, 218, 0.09), transparent 70%),
+                var(--navy);
+            color: var(--lightest-slate);
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        main {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Emoji sits centered under the text */
+        h1 {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35em;
+            font-size: clamp(20px, 2.4vw, 26px);
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.015em;
+        }
+
+        .emoji {
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Under construction <span class="emoji" aria-hidden="true">🚧</span></h1>
+    </main>
+</body>
+</html>
